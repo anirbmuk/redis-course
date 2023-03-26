@@ -1,0 +1,17 @@
+{
+  "root": true,
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "env": {
+    "es6": true
+  },
+  "ignorePatterns": [
+    "./dist"
+  ],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "rules": {
+    "no-console": ["error", { "allow": ["error"] }],
+    "semi": ["error", "always"]
+  }
+}

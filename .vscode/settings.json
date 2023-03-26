@@ -1,0 +1,17 @@
+{
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true
+    },
+    "files.eol": "\n",
+    "prettier.singleAttributePerLine": true,
+    "prettier.prettierPath": ".prettierrc",
+    "prettier.bracketSameLine": true,
+    "prettier.ignorePath": ".prettierignore",
+    "prettier.trailingComma": "all",
+    "prettier.useEditorConfig": false,
+    "prettier.singleQuote": true,
+    "prettier.printWidth": 100,
+    "editor.tabSize": 2
+  }
+  
