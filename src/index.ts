@@ -51,7 +51,9 @@ app.get<{ id: string }>('/posts/:id', async (req, res) => {
     data = response.data;
   } catch (error: unknown) {
     if (isAxiosError(error)) {
-      console.error(`${(error as AxiosError).code} - ${(error as AxiosError).message}`);
+      console.error(
+        `${(error as AxiosError).code} - ${(error as AxiosError).message}`
+      );
     }
   } finally {
     await redisClient.set(`${PREFIX}_POSTS_${key}`, JSON.stringify(data), {
