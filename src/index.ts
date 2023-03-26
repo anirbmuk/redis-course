@@ -26,14 +26,14 @@ app.post('/', async (req, res) => {
 });
 
 app.get<{ key: string }>('/:key', async (req, res) => {
-  const key = req.params.key;
+  const { key } = req.params;
   const response = await redisClient.get(`${PREFIX}_${key}`);
   res.status(200).json(response);
 });
 
 app.get<{ id: string }>('/posts/:id', async (req, res) => {
-  const key = req.params.id;
-  const cachedPost = (await redisClient.get(`${PREFIX}_POSTS_${key}`)) as
+  const { id } = req.params;
+  const cachedPost = (await redisClient.get(`${PREFIX}_POSTS_${id}`)) as
     | string
     | null;
 
@@ -44,10 +44,10 @@ app.get<{ id: string }>('/posts/:id', async (req, res) => {
   }
 
   // eslint-disable-next-line no-console
-  console.warn(`No data found in cache for id: ${key}, fetching from server`);
+  console.warn(`No data found in cache for id: ${id}, fetching from server`);
   let data = {} as Post;
   try {
-    const response = await axios.get<Post>(`${MOCK_SERVER}/posts/${key}`);
+    const response = await axios.get<Post>(`${MOCK_SERVER}/posts/${id}`);
     data = response.data;
   } catch (error: unknown) {
     if (isAxiosError(error)) {
@@ -56,7 +56,7 @@ app.get<{ id: string }>('/posts/:id', async (req, res) => {
       );
     }
   } finally {
-    await redisClient.set(`${PREFIX}_POSTS_${key}`, JSON.stringify(data), {
+    await redisClient.set(`${PREFIX}_POSTS_${id}`, JSON.stringify(data), {
       EX: 10
     });
   }
