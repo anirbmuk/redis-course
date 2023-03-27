@@ -21,4 +21,4 @@ yarn start
 GET http://localhost:3000/posts/1
 ```
 
-> Run the above end-points consecutive times and note the difference in fetch timings. The first request is fetched from the server and the response is cached for 10s. The subsequent request will be faster since it will be fetched from Redis cache, instead of the server.  
+> Run the above end-points consecutive times and note the difference in fetch timings. The first request is fetched from the server and the response is cached for 10s. The subsequent requests will be faster (before the TTL expires) since it will be fetched from Redis cache, instead of the server.  
