@@ -37,9 +37,15 @@ app.get<{ id: string }>('/posts/:id', async (req, res) => {
     | string
     | null;
 
+  if (!id?.trim() || isNaN(+id)) {
+    return res
+      .status(400)
+      .send({ error: 'PostId is either missing or malformed in request body' });
+  }
+
   if (cachedPost) {
     // eslint-disable-next-line no-console
-    console.log('Returning data from cache');
+    console.log(`Returning data from cache for id: ${id}`);
     return res.status(200).json(JSON.parse(cachedPost));
   }
 
